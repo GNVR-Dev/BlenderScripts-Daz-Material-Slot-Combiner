@@ -1,0 +1,133 @@
+# Program to combine character material slots, remove unused onse and rename long ones.
+
+# Note: Character mesh must be selected first and in Object Mode in Blender before running script
+
+import bpy
+
+context = bpy.context
+ob = context.object
+
+#Functions
+
+#Function to select multiple material slots from a list and assign them to first material in that list
+def select_and_assign (material_list): 
+ 
+    bpy.ops.object.mode_set(mode='EDIT')
+    bpy.ops.mesh.select_all(action='DESELECT')
+
+
+    i = 0
+    j = 0
+
+    # Find matching material slots names and select them
+    for slots in ob.material_slots:
+        j = 0
+        while j < len(material_list):
+          if slots.material.name == material_list[j]:
+                ob.active_material_index = i
+                bpy.ops.object.material_slot_select()
+                print (slots.material.name, " - Selected")
+          j += 1
+        i += 1
+
+
+    j = 0
+
+    #Assign selected materials to material slot matching the first name in the list
+    for slots in ob.material_slots:
+          if slots.material.name == material_list[0]:
+             ob.active_material_index = j
+             bpy.ops.object.material_slot_select()
+             bpy.ops.object.material_slot_assign()
+             bpy.ops.object.material_slot_deselect()
+             print ("Assigned to ",slots.material.name)
+             print ('\n')
+          j += 1
+
+#Function to remove material slots 
+def remove_slots (material_list): 
+    
+    bpy.ops.object.mode_set(mode='OBJECT')
+
+    i = len(ob.material_slots)-1
+    print (i)
+    j = 0
+    # Find matching material slots names and remove them
+    for slots in reversed(ob.material_slots):
+        j = 0
+        while j < len(material_list):
+          if slots.material.name == material_list[j]:
+                print (slots.material.name," - Material Slot Removed",)
+                print ('\n')
+                ob.active_material_index = i
+                bpy.ops.object.material_slot_remove()
+          j += 1
+        i -= 1
+
+
+ #Function to rename material slots 
+def rename_slots (material_list): 
+   
+    bpy.ops.object.mode_set(mode='OBJECT')
+
+    i = 0
+    j = 0
+
+    for slots in ob.material_slots:
+          if slots.material.name == material_list[0]:
+                print (slots.material.name," - Renamed")
+                ob.active_material_index = i
+                ob.active_material.name = material_list[1]
+                print (slots.material.name)
+                print ('\n')
+          i += 1
+
+
+# Start of Main Program 
+
+#Selecting and assigning material slots.
+
+#Set up list of material slots that can be combined:  The 2nd, 3rd, 4th etc material in each row will be assigned to the 1st in the row.
+
+m_listA = ["Face", "Lips", "Ears", "EyeSocket"]
+m_listB = ["Mouth", "Teeth"]
+m_listC = ["Legs", "Toenails"]
+m_listD = ["Arms", "Fingernails"]
+m_listE = ["Pupils", "Irises", "Sclera"]
+m_listF = ["EyeMoisture", "Cornea"]
+
+#Run - select and assign functions
+select_and_assign(m_listA)
+select_and_assign(m_listB)
+select_and_assign(m_listC)
+select_and_assign(m_listD)
+select_and_assign(m_listD)
+select_and_assign(m_listE)
+select_and_assign(m_listF)
+
+#Removing material slots 
+
+#Set up list of materials slots that are no longer used:
+remove_m_list = ["Lips", "Ears", "EyeSocket", "Teeth", "Toenails", "Fingernails", "Irises", "Sclera", "Cornea" ]
+
+#Run - Remove Slots Function 
+remove_slots(remove_m_list)
+
+
+#Renaming material slots
+
+#Set up list: 1st material name in each row will be renamed using 2nd 
+rename_m_listA = ["Pupils","Eyes"]
+rename_m_listB = ["Genesis8MaleEyelashes_Eyelashes","Eyelashes"]
+rename_m_listC = ["Genesis8MaleEyelashes_EyeMoisture","Eyelash_Moisture"]
+rename_m_listD = ["Genesis8FemaleEyelashes_Eyelashes","Eyelashes"]
+rename_m_listE = ["Genesis8FemaleEyelashes_EyeMoisture","Eyelash_Moisture"]
+
+#Run - Rename Slots Function 
+rename_slots(rename_m_listA)
+rename_slots(rename_m_listB)
+rename_slots(rename_m_listC)
+rename_slots(rename_m_listD)
+rename_slots(rename_m_listE)
+
+print ("Done!")
