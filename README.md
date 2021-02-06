@@ -9,7 +9,7 @@ Open the Material Properties panel on the right
 
 Click New to Create a new text data-block
 
-![Imgur](https://i.imgur.com/37wUy32.png)
+![Imgur](https://i.imgur.com/HgaX78a.png)
 
 Paste the Daz Material Slot Combiner script
 
@@ -19,7 +19,8 @@ Edit as needed for your model
 
 Click Run Script
 
-![Imgur](https://i.imgur.com/3L6xgTg.png)
+![Imgur](https://i.imgur.com/LKJI9fz.png)
 
 There will now be fewer material slots used by you model
 
+![Imgur](https://i.imgur.com/SvomNLz.png)
