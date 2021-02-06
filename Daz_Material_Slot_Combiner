@@ -61,7 +61,9 @@ def remove_slots (material_list):
                 print ('\n')
                 ob.active_material_index = i
                 bpy.ops.object.material_slot_remove()
-          j += 1
+                j += i
+          else:      
+                j += 1
         i -= 1
 
 
