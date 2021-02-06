@@ -17,10 +17,14 @@ Scroll down to the Start of Main Program to see what materials will get combined
 
 Edit as needed for your model
 
+To see the progress of the script click on Window -> menu -> and select Toggle System Console
+
+![Imgur](https://i.imgur.com/Nhj7XFn.png)
+
 Click Run Script
 
 ![Imgur](https://i.imgur.com/LKJI9fz.png)
 
 There will now be fewer material slots used by you model
 
-![Imgur](https://i.imgur.com/SvomNLz.png)
+![Imgur](https://i.imgur.com/lb0fkGc.png)
